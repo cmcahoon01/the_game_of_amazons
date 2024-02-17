@@ -4,18 +4,24 @@ from constants import SCALE, BOARD_SIZE, BORDER_COLOR, TILE_COLOR
 
 
 class Board:
+    queen_directions = [(-1, 1), (0, 1), (1, 1),
+                        (-1, 0), (0, 0), (1, 0),
+                        (-1, -1), (0, -1), (1, -1)]
+
     def __init__(self):
+        self.bitboard = 89131683419996112206878998600
         self.grid = [[Piece(SCALE) for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
-        white_queens = [(0, 6), (3, 9), (6, 9), (9, 6)]
-        black_queens = [(0, 3), (3, 0), (6, 0), (9, 3)]
-        for x, y in white_queens:
+        self.white_queens = [(0, 6), (3, 9), (6, 9), (9, 6)]
+        self.black_queens = [(0, 3), (3, 0), (6, 0), (9, 3)]
+        for x, y in self.white_queens:
             self.grid[x][y] = Queen(SCALE, "white")
-        for x, y in black_queens:
+        for x, y in self.black_queens:
             self.grid[x][y] = Queen(SCALE, "black")
 
         self.clicked = None
         self.selections = []
         self.shooting = None
+        self.black_turn = True
 
     def draw(self, screen):
         screen.fill(TILE_COLOR)
@@ -30,7 +36,7 @@ class Board:
                 self.grid[x][y].draw(screen, x, y)
 
     def click(self, x, y):
-        if self.grid[x][y].type == "queen":
+        if self.grid[x][y].type == "queen" and self.black_turn == (self.grid[x][y].color == "black"):
             self.clear_selections()
             if self.shooting is not None:
                 self.return_queen()
@@ -55,10 +61,7 @@ class Board:
         self.clear_selections()
 
     def add_selections(self):
-        queen_directions = [(-1, 1), (0, 1), (1, 1),
-                            (-1, 0), (0, 0), (1, 0),
-                            (-1, -1), (0, -1), (1, -1)]
-        for direction in queen_directions:
+        for direction in self.queen_directions:
             x, y = self.clicked[0] + direction[0], self.clicked[1] + direction[1]
             while 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE and self.grid[x][y].type is None:
                 self.grid[x][y] = Selection(SCALE, color=self.shooting)
@@ -81,14 +84,48 @@ class Board:
 
     def shoot_arrow(self, x, y):
         self.grid[x][y] = Arrow(SCALE)
+
+        # remove queen from old position, add queen to new position and add arrow
+        self.bitboard ^= 2 ** (self.shooting[0] + self.shooting[1] * 10)
+        self.bitboard ^= 2 ** (self.clicked[0] + self.clicked[1] * 10)
+        self.bitboard ^= 2 ** (x + y * 10)
+
+        queens = self.black_queens if self.black_turn else self.white_queens
+        queens.remove(self.shooting)
+        queens.append(self.clicked)
+
         self.shooting = None
         self.clicked = None
+        self.black_turn = not self.black_turn
 
     def return_queen(self):
         self.grid[self.shooting[0]][self.shooting[1]] = self.grid[self.clicked[0]][self.clicked[1]]
         self.grid[self.clicked[0]][self.clicked[1]] = Piece(SCALE)
         self.shooting = None
         self.clicked = None
+
+    def get_move_list(self):
+        move_list = []
+        if self.shooting is None:
+            queens = self.black_queens if self.black_turn else self.white_queens
+        else:
+            queens = [self.clicked]
+        for queen in queens:
+            for direction in self.queen_directions:
+                x, y = queen[0] + direction[0], queen[1] + direction[1]
+                while (0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE and
+                       (self.grid[x][y].type is None or self.grid[x][y].type == "selection")):
+                    move_list.append((queen[0], queen[1], x, y))
+                    x, y = x + direction[0], y + direction[1]
+        return move_list
+
+    def submit_move(self, move):
+        if self.shooting is None:
+            self.clicked = move[0], move[1]
+            self.move_queen(move[2], move[3])
+        else:
+            self.clear_selections()
+            self.shoot_arrow(move[2], move[3])
 
     def __getitem__(self, tup):
         return self.grid[tup[0]][tup[1]]

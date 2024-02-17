@@ -2,10 +2,11 @@ import pygame
 from constants import MOVE_COLOR, SHOOT_COLOR, WALL_COLOR
 
 style = "Spatial"
-whiteQueenPath = f"images/whiteQueen{style}.svg"
-blackQueenPath = f"images/blackQueen{style}.svg"
+whiteQueenPath = f"../images/whiteQueen{style}.svg"
+blackQueenPath = f"../images/blackQueen{style}.svg"
 queenImages = [pygame.image.load(whiteQueenPath),
                pygame.image.load(blackQueenPath)]
+arrowImage = pygame.image.load("../images/arrow.svg")
 
 PADDING = 0.1  # padding as a percentage of the tile size
 
@@ -18,7 +19,13 @@ class Piece:
         self.scale = scale
 
     def draw(self, screen, x, y):
-        pass
+        if self.color is None:
+            return
+        screen.fill(self.color,
+                    (x * self.scale + self.scale * PADDING,
+                     y * self.scale + self.scale * PADDING,
+                     self.scale * (1 - PADDING * 2),
+                     self.scale * (1 - PADDING * 2)))
 
     def __str__(self):
         return self.type if self.type else "None"
@@ -42,11 +49,15 @@ class Arrow(Piece):
     type = "arrow"
 
     def draw(self, screen, x, y):
-        pygame.draw.rect(screen, WALL_COLOR,
-                         (x * self.scale + self.scale * PADDING,
-                          y * self.scale + self.scale * PADDING,
-                          self.scale * (1 - PADDING * 2),
-                          self.scale * (1 - PADDING * 2)))
+        # pygame.draw.rect(screen, WALL_COLOR,
+        #                  (x * self.scale + self.scale * PADDING,
+        #                   y * self.scale + self.scale * PADDING,
+        #                   self.scale * (1 - PADDING * 2),
+        #                   self.scale * (1 - PADDING * 2)))
+
+        image = pygame.transform.scale(arrowImage, (self.scale, self.scale))
+        screen.blit(image, (x * self.scale,
+                            y * self.scale))
 
 
 class Selection(Piece):
