@@ -18,9 +18,9 @@ class Board:
         for x, y in self.black_queens:
             self.grid[x][y] = Queen(SCALE, "black")
 
-        self.clicked = None
+        self.clicked_queen = None
         self.selections = []
-        self.shooting = None
+        self.aiming_queen = None
         self.black_turn = True
 
     def draw(self, screen):
@@ -38,33 +38,33 @@ class Board:
     def click(self, x, y):
         if self.grid[x][y].type == "queen" and self.black_turn == (self.grid[x][y].color == "black"):
             self.clear_selections()
-            if self.shooting is not None:
+            if self.aiming_queen is not None:
                 self.return_queen()
-            self.clicked = x, y
+            self.clicked_queen = x, y
             self.add_selections()
-        elif self.clicked is not None and self.grid[x][y].type != "selection":
-            if self.shooting is not None:
+        elif self.clicked_queen is not None and self.grid[x][y].type != "selection":
+            if self.aiming_queen is not None:
                 self.return_queen()
-            self.clicked = None
+            self.clicked_queen = None
             self.clear_selections()
-        elif self.clicked is not None and self.grid[x][y].type == "selection":
+        elif self.clicked_queen is not None and self.grid[x][y].type == "selection":
             self.clear_selections()
-            if self.shooting is None:
+            if self.aiming_queen is None:
                 self.move_queen(x, y)
             else:
                 self.shoot_arrow(x, y)
 
     def right_click(self):
-        if self.shooting is not None:
+        if self.aiming_queen is not None:
             self.return_queen()
-        self.clicked = None
+        self.clicked_queen = None
         self.clear_selections()
 
     def add_selections(self):
         for direction in self.queen_directions:
-            x, y = self.clicked[0] + direction[0], self.clicked[1] + direction[1]
+            x, y = self.clicked_queen[0] + direction[0], self.clicked_queen[1] + direction[1]
             while 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE and self.grid[x][y].type is None:
-                self.grid[x][y] = Selection(SCALE, color=self.shooting)
+                self.grid[x][y] = Selection(SCALE, color=self.aiming_queen)
                 self.selections.append((x, y))
                 x, y = x + direction[0], y + direction[1]
 
@@ -75,10 +75,10 @@ class Board:
         self.selections = []
 
     def move_queen(self, x, y):
-        self.grid[x][y] = self.grid[self.clicked[0]][self.clicked[1]]
-        self.shooting = self.clicked
-        self.clicked = x, y
-        self.grid[self.shooting[0]][self.shooting[1]] = Piece(SCALE)
+        self.grid[x][y] = self.grid[self.clicked_queen[0]][self.clicked_queen[1]]
+        self.aiming_queen = self.clicked_queen
+        self.clicked_queen = x, y
+        self.grid[self.aiming_queen[0]][self.aiming_queen[1]] = Piece(SCALE)
 
         self.add_selections()
 
@@ -86,30 +86,30 @@ class Board:
         self.grid[x][y] = Arrow(SCALE)
 
         # remove queen from old position, add queen to new position and add arrow
-        self.bitboard ^= 2 ** (self.shooting[0] + self.shooting[1] * 10)
-        self.bitboard ^= 2 ** (self.clicked[0] + self.clicked[1] * 10)
+        self.bitboard ^= 2 ** (self.aiming_queen[0] + self.aiming_queen[1] * 10)
+        self.bitboard ^= 2 ** (self.clicked_queen[0] + self.clicked_queen[1] * 10)
         self.bitboard ^= 2 ** (x + y * 10)
 
         queens = self.black_queens if self.black_turn else self.white_queens
-        queens.remove(self.shooting)
-        queens.append(self.clicked)
+        queens.remove(self.aiming_queen)
+        queens.append(self.clicked_queen)
 
-        self.shooting = None
-        self.clicked = None
+        self.aiming_queen = None
+        self.clicked_queen = None
         self.black_turn = not self.black_turn
 
     def return_queen(self):
-        self.grid[self.shooting[0]][self.shooting[1]] = self.grid[self.clicked[0]][self.clicked[1]]
-        self.grid[self.clicked[0]][self.clicked[1]] = Piece(SCALE)
-        self.shooting = None
-        self.clicked = None
+        self.grid[self.aiming_queen[0]][self.aiming_queen[1]] = self.grid[self.clicked_queen[0]][self.clicked_queen[1]]
+        self.grid[self.clicked_queen[0]][self.clicked_queen[1]] = Piece(SCALE)
+        self.aiming_queen = None
+        self.clicked_queen = None
 
     def get_move_list(self):
         move_list = []
-        if self.shooting is None:
+        if self.aiming_queen is None:
             queens = self.black_queens if self.black_turn else self.white_queens
         else:
-            queens = [self.clicked]
+            queens = [self.clicked_queen]
         for queen in queens:
             for direction in self.queen_directions:
                 x, y = queen[0] + direction[0], queen[1] + direction[1]
@@ -120,8 +120,8 @@ class Board:
         return move_list
 
     def submit_move(self, move):
-        if self.shooting is None:
-            self.clicked = move[0], move[1]
+        if self.aiming_queen is None:
+            self.clicked_queen = move[0], move[1]
             self.move_queen(move[2], move[3])
         else:
             self.clear_selections()

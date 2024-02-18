@@ -1,9 +1,11 @@
 import pygame
+
+from bot.bot import Bot
+from bot.evilBot import EvilBot
 from pieces import Piece, Queen, Arrow
 from board import Board
 from constants import BOARD_SIZE, SCALE
-from bot import Bot
-
+import pickle
 
 def main():
     # Initialize Pygame
@@ -24,20 +26,34 @@ def main():
 
 def main_loop(screen, clock, board):
     running = True
-    bot = Bot(board)
+    bot1 = Bot(board)
+    bot2 = EvilBot(board)
+    bots = [bot1, bot2]
+    current_bot = 0
+    # board = pickle.load(open("board.p", "rb"))
+    # bots = pickle.load(open("bots.p", "rb"))
+    # current_bot = pickle.load(open("current_bot.p", "rb"))
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             else:
-                handle_event(event, board, bot)
+                handle_event(event, board, bot2)
 
-        # bot.make_move()
+        try:
+            bots[current_bot].make_move(updated_board=board)
+            current_bot = (current_bot + 1) % 2
+        except Exception as e:
+            print(e)
+            pickle.dump(board, open("board.p", "wb"))
+            pickle.dump(bots, open("bots.p", "wb"))
+            pickle.dump(current_bot, open("current_bot.p", "wb"))
+            # running = False
+
         board.draw(screen)
 
         pygame.display.flip()
         clock.tick(30)
-
 
 def handle_event(event, board, bot):
     if event.type == pygame.MOUSEBUTTONDOWN:
@@ -48,11 +64,12 @@ def handle_event(event, board, bot):
             board.right_click()
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE:
-            bot = Bot(board)
-            try:
-                bot.make_move()
-            except Exception as e:
-                print(e)
+            bot = EvilBot(board)
+            bot.make_move()
+            # try:
+            #     bot.make_move()
+            # except Exception as e:
+            #     print(e)
 
 
 def get_tile(pos):

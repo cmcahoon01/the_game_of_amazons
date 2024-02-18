@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Added queen movement and shooting">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/bot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/testBotBoard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/The game of amazons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/The game of amazons.iml" afterDir="false" />
+    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Added basic bot to play against">
+      <change afterPath="$PROJECT_DIR$/src/bot/botBoard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/evilBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/blackQueenAlpha.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/blackQueenAlpha.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/blackQueenSpatial.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/blackQueenSpatial.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pieces.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pieces.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +59,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Misc_python\the game of amazons\src\bot" />
       <recent name="D:\Misc_python\the game of amazons\src" />
       <recent name="D:\Misc_python\the game of amazons\images" />
     </key>
@@ -185,7 +178,9 @@
       <workItem from="1707410117538" duration="2730000" />
       <workItem from="1707502318764" duration="3515000" />
       <workItem from="1707934579804" duration="18560000" />
-      <workItem from="1708200991989" duration="3601000" />
+      <workItem from="1708200991989" duration="12035000" />
+      <workItem from="1708221666878" duration="4571000" />
+      <workItem from="1708271745427" duration="1228000" />
     </task>
     <task id="LOCAL-00001" summary="Initial board setup and drawing">
       <option name="closed" value="true" />
@@ -203,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705185688528</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added basic bot to play against">
+      <option name="closed" value="true" />
+      <created>1708204618553</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708204618553</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,7 +226,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial board setup and drawing" />
     <MESSAGE value="Added queen movement and shooting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added queen movement and shooting" />
+    <MESSAGE value="Added basic bot to play against" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic bot to play against" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -244,26 +248,9 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="move == 9903521210112059028865549376" language="Python" />
-          <url>file://$PROJECT_DIR$/src/bot/bot.py</url>
-          <line>117</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="move == 9903521210112059028865549376" language="Python" />
-          <url>file://$PROJECT_DIR$/src/bot/bot.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/bot/bot.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/bot/bot.py</url>
-          <line>123</line>
-          <option name="timeStamp" value="38" />
+          <url>file://$PROJECT_DIR$/src/main.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -284,7 +271,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707417515437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708204299619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708275211801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$testBotBoard.coverage" NAME="testBotBoard Coverage Results" MODIFIED="1707964411066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators.coverage" NAME="generators Coverage Results" MODIFIED="1707937022506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/The_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707362830984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
