@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Added basic bot to play against">
-      <change afterPath="$PROJECT_DIR$/src/bot/botBoard.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/evilBot.py" afterDir="false" />
+    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Tested alternate bot that only thinks once for moving and aiming">
+      <change afterPath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot/evilBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/evilBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +179,9 @@
       <workItem from="1707934579804" duration="18560000" />
       <workItem from="1708200991989" duration="12035000" />
       <workItem from="1708221666878" duration="4571000" />
-      <workItem from="1708271745427" duration="1228000" />
+      <workItem from="1708271745427" duration="13469000" />
+      <workItem from="1708451654117" duration="67000" />
+      <workItem from="1708451743786" duration="7512000" />
     </task>
     <task id="LOCAL-00001" summary="Initial board setup and drawing">
       <option name="closed" value="true" />
@@ -206,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708204618553</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Tested alternate bot that only thinks once for moving and aiming">
+      <option name="closed" value="true" />
+      <created>1708275518403</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708275518403</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +236,8 @@
     <MESSAGE value="Initial board setup and drawing" />
     <MESSAGE value="Added queen movement and shooting" />
     <MESSAGE value="Added basic bot to play against" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic bot to play against" />
+    <MESSAGE value="Tested alternate bot that only thinks once for moving and aiming" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tested alternate bot that only thinks once for moving and aiming" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -248,9 +258,19 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/main.py</url>
-          <line>43</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/bot/evilBot.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/bot/evilBot.py</url>
+          <line>120</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/bot/monteCarloSearch.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -271,7 +291,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707417515437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708275211801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708464028535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$testBotBoard.coverage" NAME="testBotBoard Coverage Results" MODIFIED="1707964411066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators.coverage" NAME="generators Coverage Results" MODIFIED="1707937022506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/The_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707362830984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

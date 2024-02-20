@@ -29,10 +29,12 @@ def main_loop(screen, clock, board):
     bot1 = Bot(board)
     bot2 = EvilBot(board)
     bots = [bot1, bot2]
-    current_bot = 0
+    current_bot = 1
     # board = pickle.load(open("board.p", "rb"))
     # bots = pickle.load(open("bots.p", "rb"))
     # current_bot = pickle.load(open("current_bot.p", "rb"))
+    board.draw(screen)
+    pygame.display.flip()
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -40,6 +42,8 @@ def main_loop(screen, clock, board):
             else:
                 handle_event(event, board, bot2)
 
+        # bots[current_bot].make_move(updated_board=board)
+        # current_bot = (current_bot + 1) % 2
         try:
             bots[current_bot].make_move(updated_board=board)
             current_bot = (current_bot + 1) % 2
@@ -48,7 +52,7 @@ def main_loop(screen, clock, board):
             pickle.dump(board, open("board.p", "wb"))
             pickle.dump(bots, open("bots.p", "wb"))
             pickle.dump(current_bot, open("current_bot.p", "wb"))
-            # running = False
+        #     running = False
 
         board.draw(screen)
 
@@ -64,7 +68,7 @@ def handle_event(event, board, bot):
             board.right_click()
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE:
-            bot = EvilBot(board)
+            bot = Bot(board)
             bot.make_move()
             # try:
             #     bot.make_move()
