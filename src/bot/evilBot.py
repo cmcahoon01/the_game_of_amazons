@@ -6,8 +6,8 @@ from constants import BOARD_SIZE
 
 
 class EvilBot:
-    move_time_limit = 7
-    aim_time_limit = 3
+    move_time_limit = 4
+    aim_time_limit = 1
 
     end_thinking_time = 0
 
@@ -34,14 +34,14 @@ class EvilBot:
         start = perf_counter()
         self.end_thinking_time = start + self.move_time_limit
         self.make_half_move()
-        print("moving took:", perf_counter() - start)
+        print("-moving took:", perf_counter() - start)
 
     def shoot_arrow(self):
         print("-Thinking where to shoot")
         start = perf_counter()
         self.end_thinking_time = start + self.aim_time_limit
         self.make_half_move()
-        print("shooting took:", perf_counter() - start)
+        print("-shooting took:", perf_counter() - start)
 
     def make_half_move(self):
         best = self.iterative_deepening()
@@ -57,7 +57,7 @@ class EvilBot:
             if searched[0] > best[0]:
                 best = searched
             depth += 1
-        print("-Depth reached:", depth - 1, "best found:", best[0], end=" ")
+        print("-Depth reached:", depth - 1, "best found:", best[0])
         return best[1]
 
     def search_with_pruning(self, board, depth, alpha, beta):
@@ -82,11 +82,12 @@ class EvilBot:
     def heuristic(self, board):
         move_diff = self.get_num_moves(board)
         control_diff = self.get_controlled_squares(board)
-        return move_diff + control_diff * 10
+        return (move_diff + 9 * control_diff) / 10
 
     @staticmethod
     def get_controlled_squares(board):  # areas with opposing queens are not controlled
         white_area = 0
+        total_area = 0
         seen_queens = set()
         for i in range(2):
             for queen in board.queens[i]:
@@ -120,9 +121,10 @@ class EvilBot:
                             stack.append((new_x, new_y))
                 total_queens_in_area = white_queens_in_area + black_queens_in_area
                 white_area += this_queens_control * (white_queens_in_area - black_queens_in_area) / total_queens_in_area
+                total_area += this_queens_control
         if board.black_turn:
-            return -white_area
-        return white_area
+            return -white_area / total_area
+        return white_area / total_area
 
     @staticmethod
     def get_num_moves(board):
@@ -132,4 +134,6 @@ class EvilBot:
         their_moves = len(board.get_move_list())
         board.black_turn = not board.black_turn  # undo the change
         board.currently_aiming = temp
+        if my_moves + their_moves == 0:
+            return -1
         return (my_moves - their_moves) / (my_moves + their_moves)

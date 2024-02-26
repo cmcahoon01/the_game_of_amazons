@@ -7,6 +7,7 @@ from board import Board
 from constants import BOARD_SIZE, SCALE
 import pickle
 
+
 def main():
     # Initialize Pygame
     pygame.init()
@@ -26,10 +27,10 @@ def main():
 
 def main_loop(screen, clock, board):
     running = True
-    bot1 = Bot(board)
+    bot1 = Bot(board, c=1)
     bot2 = EvilBot(board)
     bots = [bot1, bot2]
-    current_bot = 1
+    current_bot = 0
     # board = pickle.load(open("board.p", "rb"))
     # bots = pickle.load(open("bots.p", "rb"))
     # current_bot = pickle.load(open("current_bot.p", "rb"))
@@ -40,7 +41,7 @@ def main_loop(screen, clock, board):
             if event.type == pygame.QUIT:
                 running = False
             else:
-                handle_event(event, board, bot2)
+                handle_event(event, board)
 
         # bots[current_bot].make_move(updated_board=board)
         # current_bot = (current_bot + 1) % 2
@@ -59,7 +60,8 @@ def main_loop(screen, clock, board):
         pygame.display.flip()
         clock.tick(30)
 
-def handle_event(event, board, bot):
+
+def handle_event(event, board):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if event.button == 1:  # left click
             x, y = get_tile(event.pos)

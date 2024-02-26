@@ -21,7 +21,7 @@ class Board:
         self.clicked_queen = None
         self.selections = []
         self.aiming_queen = None
-        self.black_turn = True
+        self.black_turn = False
 
     def draw(self, screen):
         screen.fill(TILE_COLOR)
@@ -83,7 +83,7 @@ class Board:
         self.add_selections()
 
     def shoot_arrow(self, x, y):
-        self.grid[x][y] = Arrow(SCALE)
+        self.grid[x][y] = Arrow(SCALE, color="black" if self.black_turn else "white")
 
         # remove queen from old position, add queen to new position and add arrow
         self.bitboard ^= 2 ** (self.aiming_queen[0] + self.aiming_queen[1] * 10)

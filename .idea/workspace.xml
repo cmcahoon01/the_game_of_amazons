@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Tested alternate bot that only thinks once for moving and aiming">
-      <change afterPath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" afterDir="false" />
+    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic">
+      <change afterPath="$PROJECT_DIR$/images/arrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/blackArrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/whiteArrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/otherMonteCarloSearch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/test/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/test/connect_2_board.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/test/testBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot/evilBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/evilBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pieces.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pieces.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,32 +44,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.generators (1).executor": "Run",
-    "Python.generators.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.testBotBoard.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.generators (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.generators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testBot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testBotBoard.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Misc_python\the game of amazons\images" />
       <recent name="D:\Misc_python\the game of amazons\src\bot" />
       <recent name="D:\Misc_python\the game of amazons\src" />
-      <recent name="D:\Misc_python\the game of amazons\images" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -110,6 +120,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testBot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="The game of amazons" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/bot/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/bot/test/testBot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="testBotBoard" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="The game of amazons" />
       <option name="ENV_FILES" value="" />
@@ -136,6 +169,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.testBot" />
         <item itemvalue="Python.testBotBoard" />
         <item itemvalue="Python.generators" />
       </list>
@@ -181,7 +215,11 @@
       <workItem from="1708221666878" duration="4571000" />
       <workItem from="1708271745427" duration="13469000" />
       <workItem from="1708451654117" duration="67000" />
-      <workItem from="1708451743786" duration="7512000" />
+      <workItem from="1708451743786" duration="12587000" />
+      <workItem from="1708473444336" duration="11642000" />
+      <workItem from="1708532617631" duration="9979000" />
+      <workItem from="1708622907778" duration="1246000" />
+      <workItem from="1708911180057" duration="18304000" />
     </task>
     <task id="LOCAL-00001" summary="Initial board setup and drawing">
       <option name="closed" value="true" />
@@ -215,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708275518403</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic">
+      <option name="closed" value="true" />
+      <created>1708464827601</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708464827601</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +283,8 @@
     <MESSAGE value="Added queen movement and shooting" />
     <MESSAGE value="Added basic bot to play against" />
     <MESSAGE value="Tested alternate bot that only thinks once for moving and aiming" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tested alternate bot that only thinks once for moving and aiming" />
+    <MESSAGE value="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -258,19 +305,19 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/bot/evilBot.py</url>
-          <line>88</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/bot/test/testBot.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/bot/evilBot.py</url>
-          <line>120</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/src/bot/test/testBot.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/bot/monteCarloSearch.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="12" />
+          <line>33</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -283,18 +330,18 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="bin(self.bit_board)" language="Python" />
-        <watch expression="bin(new_bitboard)" language="Python" />
-        <watch expression="bin(difference)" language="Python" />
+        <watch expression="self.board.empty_turn" language="Python" />
+        <watch expression="board.empty_turn" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707417515437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708464028535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708930020918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$testBotBoard.coverage" NAME="testBotBoard Coverage Results" MODIFIED="1707964411066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators.coverage" NAME="generators Coverage Results" MODIFIED="1707937022506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/The_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707362830984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$testBot.coverage" NAME="testBot Coverage Results" MODIFIED="1708925531680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/bot/test" />
     <SUITE FILE_PATH="coverage/The_game_of_amazons$generators.coverage" NAME="generators Coverage Results" MODIFIED="1707355630226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

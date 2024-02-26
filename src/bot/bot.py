@@ -2,19 +2,21 @@ from bot.botBoard import BotBoard
 from time import perf_counter
 import random
 from bot.monteCarloSearch import run_monte_carlo_tree_search
+from constants import BOARD_SIZE
 
 
 class Bot:
-    move_time_limit = 7
-    aim_time_limit = 3
+    move_time_limit = 4
+    aim_time_limit = 1
 
     end_thinking_time = 0
 
-    def __init__(self, board):
+    def __init__(self, board, c=10):
         self.true_board = None
         self.bit_board = None
         self.setup_board(board)
         self.evaluated_leafs = 0
+        self.c = c
 
     def setup_board(self, board):
         self.true_board = board
@@ -43,7 +45,7 @@ class Bot:
         print("shooting took:", perf_counter() - start)
 
     def make_half_move(self):
-        best, leafs = run_monte_carlo_tree_search(self.bit_board, self.heuristic, self.end_thinking_time, 10000)
+        best, leafs = run_monte_carlo_tree_search(self.bit_board, self.heuristic, self.end_thinking_time, c=self.c)
         self.evaluated_leafs += leafs
         translated_move = self.bit_board.translate_move(best)
         self.true_board.submit_move(translated_move)
@@ -79,16 +81,62 @@ class Bot:
                 break
         return best
 
+    def heuristic(self, board):
+        move_diff = self.get_num_moves(board)
+        control_diff = self.get_controlled_squares(board)
+        return (move_diff + 9 * control_diff) / 10
+        # return move_diff
+
     @staticmethod
-    def heuristic(board):
+    def get_controlled_squares(board):  # areas with opposing queens are not controlled
+        white_area = 0
+        total_area = 0
+        seen_queens = set()
+        for i in range(2):
+            for queen in board.queens[i]:
+                if queen in seen_queens:
+                    continue
+                seen_queens.add(queen)
+                visited = set()
+                stack = [queen]
+                this_queens_control = 1  # to account for the queen's tile not being counted
+                white_queens_in_area = 1 - i
+                black_queens_in_area = i
+                while stack:
+                    x, y = stack.pop()
+                    if (x, y) in visited:
+                        continue
+                    visited.add((x, y))
+                    this_queens_control += 1
+                    for direction in board.directions:
+                        new_x, new_y = x + direction[0], y + direction[1]
+                        if 0 <= new_x < BOARD_SIZE and 0 <= new_y < BOARD_SIZE:
+                            if (new_x, new_y) in board.queens[0]:
+                                if (new_x, new_y) not in seen_queens:
+                                    seen_queens.add((new_x, new_y))
+                                    white_queens_in_area += 1
+                            elif (new_x, new_y) in board.queens[not i]:
+                                if (new_x, new_y) not in seen_queens:
+                                    seen_queens.add((new_x, new_y))
+                                    black_queens_in_area += 1
+                            if board.bit_board & (1 << (new_x + new_y * BOARD_SIZE)):
+                                continue
+                            stack.append((new_x, new_y))
+                total_queens_in_area = white_queens_in_area + black_queens_in_area
+                white_area += this_queens_control * (white_queens_in_area - black_queens_in_area) / total_queens_in_area
+                total_area += this_queens_control
+        if board.black_turn:
+            return -white_area / total_area
+        return white_area / total_area
+
+    @staticmethod
+    def get_num_moves(board):
         temp, board.currently_aiming = board.currently_aiming, None  # temporarily remove aiming queen
         my_moves = len(board.get_move_list())
         board.black_turn = not board.black_turn
         their_moves = len(board.get_move_list())
         board.black_turn = not board.black_turn  # undo the change
         board.currently_aiming = temp
-        if my_moves == 0:
-            return float('-inf')
-        if their_moves == 0:
-            return float('inf')
+        if my_moves + their_moves == 0:
+            return -1
         return (my_moves - their_moves) / (my_moves + their_moves)

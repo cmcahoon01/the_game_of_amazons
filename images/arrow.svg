@@ -1,0 +1,14 @@
+<svg height="200" viewBox="0 0 200 200" width="200" xmlns="http://www.w3.org/2000/svg">
+    <filter id="a" height="150%" width="150%">
+        <feGaussianBlur in="SourceAlpha" result="blur" stdDeviation="3"/>
+        <feColorMatrix in="blur" result="blurAlpha" values="2 0 0 0 0 0 2 0 0 0 0 0 2 0 0 0 0 0 0.5 0"/>
+        <feOffset dx="4.5" dy="4.5" in="blurAlpha" result="offsetBlur"/>
+        <feBlend in="SourceGraphic" in2="offsetBlur"/>
+    </filter>
+    <path d="M21.71,7.57,16.44,2.29A1.05,1.05,0,0,0,15.73,2H8.27a1.05,1.05,0,0,0-.71.29L2.29,7.57a1,1,0,0,0-.29.7v7.46a1,1,0,0,0,.29.7l5.27,5.28a1.05,1.05,0,0,0,.71.29h7.46a1.05,1.05,0,0,0,.71-.29l5.27-5.28a1,1,0,0,0,.29-.7V8.27A1,1,0,0,0,21.71,7.57Z"
+          fill="#7f899b" fill-rule="evenodd" stroke="#333" stroke-width="1" stroke-linejoin="bevel" filter="url(#a)"/>
+<!--    <path d="M12.83,9.25,15,12.45A1,1,0,0,1,14.13,14H9.87A1,1,0,0,1,9,12.45l2.13-3.2A1,1,0,0,1,12.83,9.25Z"-->
+<!--          fill="#7f899b" fill-rule="evenodd" stroke="#333" stroke-width="4" stroke-linejoin="bevel" filter="url(#a)"/>-->
+    <path d="M68.787 40.503L100 71.716l31.213-31.213 35.356-7.072-7.072 35.356L128.284 100l31.213 31.213 7.072 35.356-35.356-7.072L100 128.284l-31.213 31.213-35.356 7.072 7.072-35.356L71.716 100 40.503 68.787 33.43 33.43z"
+          fill="#7f899b" fill-rule="evenodd" stroke="#333" stroke-width="4" stroke-linejoin="bevel" filter="url(#a)"/>
+</svg>

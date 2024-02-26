@@ -6,7 +6,11 @@ whiteQueenPath = f"../images/whiteQueen{style}.svg"
 blackQueenPath = f"../images/blackQueen{style}.svg"
 queenImages = [pygame.image.load(whiteQueenPath),
                pygame.image.load(blackQueenPath)]
-arrowImage = pygame.image.load("../images/arrow.svg")
+# arrowImage = pygame.image.load("../images/arrow.svg")
+whiteArrowPath = f"../images/whiteArrow.svg"
+blackArrowPath = f"../images/blackArrow.svg"
+arrowImages = [pygame.image.load(whiteArrowPath),
+               pygame.image.load(blackArrowPath)]
 
 PADDING = 0.1  # padding as a percentage of the tile size
 
@@ -49,15 +53,12 @@ class Arrow(Piece):
     type = "arrow"
 
     def draw(self, screen, x, y):
-        # pygame.draw.rect(screen, WALL_COLOR,
-        #                  (x * self.scale + self.scale * PADDING,
-        #                   y * self.scale + self.scale * PADDING,
-        #                   self.scale * (1 - PADDING * 2),
-        #                   self.scale * (1 - PADDING * 2)))
+        image = arrowImages[0 if self.color == "white" else 1]
+        grow = self.scale * 0.17
 
-        image = pygame.transform.scale(arrowImage, (self.scale, self.scale))
-        screen.blit(image, (x * self.scale,
-                            y * self.scale))
+        image = pygame.transform.scale(image, (self.scale + grow, self.scale + grow))
+        screen.blit(image, (x * self.scale - grow // 2,
+                            y * self.scale - grow // 2))
 
 
 class Selection(Piece):
