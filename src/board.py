@@ -21,7 +21,7 @@ class Board:
         self.clicked_queen = None
         self.selections = []
         self.aiming_queen = None
-        self.black_turn = False
+        self.black_turn = True
 
     def draw(self, screen):
         screen.fill(TILE_COLOR)
@@ -140,3 +140,6 @@ class Board:
 
     def __str__(self):
         return str(self.grid)
+
+    def is_game_over(self):
+        return len(self.get_move_list()) == 0

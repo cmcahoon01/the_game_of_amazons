@@ -81,11 +81,11 @@ class EvilBot:
 
     def heuristic(self, board):
         move_diff = self.get_num_moves(board)
-        control_diff = self.get_controlled_squares(board)
+        control_diff = self.get_controlled_squares_v2(board)
         return (move_diff + 9 * control_diff) / 10
 
     @staticmethod
-    def get_controlled_squares(board):  # areas with opposing queens are not controlled
+    def get_controlled_squares_v1(board):  # areas with opposing queens are not controlled
         white_area = 0
         total_area = 0
         seen_queens = set()
@@ -122,6 +122,45 @@ class EvilBot:
                 total_queens_in_area = white_queens_in_area + black_queens_in_area
                 white_area += this_queens_control * (white_queens_in_area - black_queens_in_area) / total_queens_in_area
                 total_area += this_queens_control
+        if board.black_turn:
+            return -white_area / total_area
+        return white_area / total_area
+
+    def get_controlled_squares_v2(self, board):
+        visited_squares = set()
+        white_area = 0
+        total_area = 0
+        for i in range(BOARD_SIZE):
+            for j in range(BOARD_SIZE):
+                if (i, j) in visited_squares:
+                    continue
+                if board.bit_board & (1 << (i + j * BOARD_SIZE)):
+                    continue
+                stack = {(i, j)}
+                white_queens_in_area = set()
+                black_queens_in_area = set()
+                area_size = 0
+                while stack:
+                    x, y = stack.pop()
+                    if (x, y) in visited_squares:
+                        continue
+                    area_size += 1
+                    for direction in board.directions:
+                        new_x, new_y = x + direction[0], y + direction[1]
+                        if 0 <= new_x < BOARD_SIZE and 0 <= new_y < BOARD_SIZE:
+                            if (new_x, new_y) in board.queens[0]:
+                                white_queens_in_area.add((new_x, new_y))
+                            elif (new_x, new_y) in board.queens[1]:
+                                black_queens_in_area.add((new_x, new_y))
+                            elif (not board.bit_board & (1 << (new_x + new_y * BOARD_SIZE)) and
+                                  (new_x, new_y) not in visited_squares):
+                                stack.add((new_x, new_y))
+                    visited_squares.add((x, y))
+                total_queens_in_area = len(white_queens_in_area) + len(black_queens_in_area)
+                if total_queens_in_area == 0:
+                    continue
+                white_area += area_size * (len(white_queens_in_area) - len(black_queens_in_area)) / total_queens_in_area
+                total_area += area_size
         if board.black_turn:
             return -white_area / total_area
         return white_area / total_area

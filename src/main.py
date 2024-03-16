@@ -2,6 +2,7 @@ import pygame
 
 from bot.bot import Bot
 from bot.evilBot import EvilBot
+from bot.test.neutralBot import NeutralBot
 from pieces import Piece, Queen, Arrow
 from board import Board
 from constants import BOARD_SIZE, SCALE
@@ -27,10 +28,10 @@ def main():
 
 def main_loop(screen, clock, board):
     running = True
-    bot1 = Bot(board, c=1)
+    bot1 = Bot(board)
     bot2 = EvilBot(board)
     bots = [bot1, bot2]
-    current_bot = 0
+    current_bot = 1
     # board = pickle.load(open("board.p", "rb"))
     # bots = pickle.load(open("bots.p", "rb"))
     # current_bot = pickle.load(open("current_bot.p", "rb"))
@@ -45,15 +46,15 @@ def main_loop(screen, clock, board):
 
         # bots[current_bot].make_move(updated_board=board)
         # current_bot = (current_bot + 1) % 2
-        try:
-            bots[current_bot].make_move(updated_board=board)
-            current_bot = (current_bot + 1) % 2
-        except Exception as e:
-            print(e)
-            pickle.dump(board, open("board.p", "wb"))
-            pickle.dump(bots, open("bots.p", "wb"))
-            pickle.dump(current_bot, open("current_bot.p", "wb"))
-        #     running = False
+        # try:
+        #     bots[current_bot].make_move(updated_board=board)
+        #     current_bot = (current_bot + 1) % 2
+        # except Exception as e:
+        #     print(e)
+        #     pickle.dump(board, open("board.p", "wb"))
+        #     pickle.dump(bots, open("bots.p", "wb"))
+        #     pickle.dump(current_bot, open("current_bot.p", "wb"))
+            # running = False
 
         board.draw(screen)
 
@@ -70,7 +71,7 @@ def handle_event(event, board):
             board.right_click()
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE:
-            bot = Bot(board)
+            bot = EvilBot(board)
             bot.make_move()
             # try:
             #     bot.make_move()

@@ -92,3 +92,8 @@ class BotBoard:
         new_piece_index = int(log2(new_piece_bit))
         new_x, new_y = new_piece_index % BOARD_SIZE, new_piece_index // BOARD_SIZE
         return old_x, old_y, new_x, new_y
+
+    def last_move(self):
+        board, queens, aiming = self.history[-1]
+        old_x, old_y, new_x, new_y = self.translate_move(board)
+        return new_x, new_y

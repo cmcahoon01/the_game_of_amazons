@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic">
-      <change afterPath="$PROJECT_DIR$/images/arrow.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/blackArrow.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/whiteArrow.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/otherMonteCarloSearch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/test/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/test/connect_2_board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bot/test/testBot.py" afterDir="false" />
+    <list default="true" id="869ec651-b564-41ee-9841-ac791737e5eb" name="Changes" comment="Bug Fixed Monte Carlo Tree search&#10;&#10;still did not beat minimax">
+      <change afterPath="$PROJECT_DIR$/src/bot/neuralNet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bot/test/neutralBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot/botBoard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/botBoard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bot/evilBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/evilBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/monteCarloSearch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pieces.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pieces.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +44,7 @@
     &quot;Python.generators (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.generators.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.neuralNet.executor&quot;: &quot;Debug&quot;,
     &quot;Python.testBot.executor&quot;: &quot;Run&quot;,
     &quot;Python.testBotBoard.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -62,7 +57,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -166,6 +161,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.generators" />
+      <item itemvalue="Python.testBot" />
+      <item itemvalue="Python.testBotBoard" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
@@ -178,7 +179,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -220,6 +221,16 @@
       <workItem from="1708532617631" duration="9979000" />
       <workItem from="1708622907778" duration="1246000" />
       <workItem from="1708911180057" duration="18304000" />
+      <workItem from="1708967341043" duration="6421000" />
+      <workItem from="1708994702088" duration="4224000" />
+      <workItem from="1709050459512" duration="19000" />
+      <workItem from="1709683083281" duration="3000" />
+      <workItem from="1710273823548" duration="1208000" />
+      <workItem from="1710428837611" duration="594000" />
+      <workItem from="1710463518283" duration="596000" />
+      <workItem from="1710511000005" duration="6901000" />
+      <workItem from="1710623865582" duration="189000" />
+      <workItem from="1710624075202" duration="202000" />
     </task>
     <task id="LOCAL-00001" summary="Initial board setup and drawing">
       <option name="closed" value="true" />
@@ -261,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708464827601</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Bug Fixed Monte Carlo Tree search&#10;&#10;still did not beat minimax">
+      <option name="closed" value="true" />
+      <created>1708967482914</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708967482914</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +303,8 @@
     <MESSAGE value="Added basic bot to play against" />
     <MESSAGE value="Tested alternate bot that only thinks once for moving and aiming" />
     <MESSAGE value="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Monte Carlo Tree Search. Did not appear to be better than the area control heuristic" />
+    <MESSAGE value="Bug Fixed Monte Carlo Tree search&#10;&#10;still did not beat minimax" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixed Monte Carlo Tree search&#10;&#10;still did not beat minimax" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -319,6 +339,22 @@
           <line>33</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/bot/test/neutralBot.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/bot/test/neutralBot.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="total_queens_in_area == 0" language="Python" />
+          <url>file://$PROJECT_DIR$/src/bot/evilBot.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -330,14 +366,14 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="self.board.empty_turn" language="Python" />
-        <watch expression="board.empty_turn" language="Python" />
+        <watch expression="visited_squares" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$neuralNet.coverage" NAME="neuralNet Coverage Results" MODIFIED="1709003925168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/bot" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707417515437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1708930020918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/the_game_of_amazons$main.coverage" NAME="main Coverage Results" MODIFIED="1710530869720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$testBotBoard.coverage" NAME="testBotBoard Coverage Results" MODIFIED="1707964411066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/the_game_of_amazons$generators.coverage" NAME="generators Coverage Results" MODIFIED="1707937022506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/The_game_of_amazons$generators__1_.coverage" NAME="generators (1) Coverage Results" MODIFIED="1707362830984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
